@@ -3,7 +3,7 @@ package BoardGame;
 
 public class Board {
     private int linhas, colunas;
-    private Peca[][] pecas;
+    private Peca[][] pecass;
 
     public Board(int linhas, int colunas) {
         if(linhas<1 || colunas<1){
@@ -11,7 +11,7 @@ public class Board {
         }
         this.linhas = linhas;
         this.colunas = colunas;
-        this.pecas = new Peca[linhas][colunas];
+        this.pecass = new Peca[linhas][colunas];
     }
 
     public int getLinhas() {
@@ -23,27 +23,39 @@ public class Board {
     }
 
     public Peca[][] getPecas() {
-        return pecas;
+        return pecass;
     }
 
     public Peca pecas(int linha, int coluna){
         if(!posicaoExistente(linha, coluna)){
             throw new BoardException("Posicao invalida!");
         }
-        return pecas[linha][coluna];
+        return pecass[linha][coluna];
     }
     public Peca pecas(Posicao posicao){
         if(!posicaoExistente(posicao)){
             throw new BoardException("Posicao invalida!");
         }
-        return pecas[posicao.getLinha()][posicao.getColuna()];   
+        return pecass[posicao.getLinha()][posicao.getColuna()];   
     }
     public void colocarPeca(Peca peca, Posicao posicao){
         if(temUmaPeca(posicao)){
-            throw new BoardException("Tem uma peca nesse lugar");
+            throw new BoardException("Tem uma peca nesse lugar "+posicao);
         }
-        pecas[posicao.getLinha()][posicao.getColuna()] = peca;
+        pecass[posicao.getLinha()][posicao.getColuna()] = peca;
         peca.position = posicao;
+    }
+    public Peca removePeca(Posicao posicao){
+        if(!posicaoExistente(posicao)){
+            throw new BoardException("Nao tem uma peca nesse lugar remove");
+        }
+        if(pecas(posicao)==null){
+            return null;
+        }
+        Peca aux = pecas(posicao);
+        aux.position=null;
+        pecass[posicao.getLinha()][posicao.getColuna()]=null;
+        return aux;
     }
     public boolean posicaoExistente(int linha, int coluna){
         return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;

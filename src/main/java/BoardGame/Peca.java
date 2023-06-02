@@ -6,6 +6,7 @@ public class Peca {
 
     public Peca(Board board) {
         this.board = board;
+        position=null;
     }
 
    protected Board getBoard() {

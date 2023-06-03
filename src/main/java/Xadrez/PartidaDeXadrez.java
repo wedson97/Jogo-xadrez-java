@@ -31,6 +31,9 @@ public class PartidaDeXadrez {
         if(!taboleiro.temUmaPeca(posicao)){
             throw new XadrezException("Tem um peca ne posicao validate");
         }
+        if(!taboleiro.pecas(posicao).temAlgumMovimento()){
+            throw new XadrezException("Nao foi possivel mover");
+        }
     }
     private Peca fazerMovimento(Posicao source, Posicao target){
         Peca p = taboleiro.removePeca(source);

@@ -67,6 +67,6 @@ public class Board {
         if(!posicaoExistente(posicao)){
             throw new BoardException("Posicao invalida!");
         }
-       return pecas(posicao)!=null;
+        return pecas(posicao)!=null;
     }
 }

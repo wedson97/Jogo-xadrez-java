@@ -20,6 +20,12 @@ public class PartidaDeXadrez {
         }
         return matriz;
     }
+    public boolean[][] movimentoPossiveis(XadrezPosicao source){
+        Posicao posicao = source.toPosicao();
+        ValidateSourcePosition(posicao);
+        return taboleiro.pecas(posicao).possivelMovimentos();
+    }
+    
     public PecaDeXadrez Movimentacao(XadrezPosicao sourceposition, XadrezPosicao targetposition){
         Posicao source = sourceposition.toPosicao();
         Posicao target = targetposition.toPosicao();

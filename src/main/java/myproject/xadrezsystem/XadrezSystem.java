@@ -21,7 +21,11 @@ public class XadrezSystem {
                         System.out.println();
                         System.out.print("Source: ");
                         XadrezPosicao source = UI.lerPosicao(sc);
-
+                        
+                        boolean[][] possiveiMovimentos = partida.movimentoPossiveis(source);
+                        UI.LimparTela();
+                        UI.printBoard(partida.getPecas(),possiveiMovimentos);
+                        
                         System.out.println();
                         System.out.print("Target: ");
                         XadrezPosicao target = UI.lerPosicao(sc);

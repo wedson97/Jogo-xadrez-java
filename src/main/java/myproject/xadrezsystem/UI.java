@@ -45,15 +45,28 @@ public class UI {
         for(int i =0;i<pecas.length;i++){
             System.out.print((8 - i)+" ");
             for(int j =0;j<pecas.length;j++){
-                printPeca(pecas[i][j]);
+                printPeca(pecas[i][j],false);
             }
             System.out.println();
         }
         System.out.println("  a b c d e f g h");
     }
-    private static void printPeca(PecaDeXadrez peca){
+public static void printBoard(PecaDeXadrez[][] pecas, boolean[][] possiveis){
+        for(int i =0;i<pecas.length;i++){
+            System.out.print((8 - i)+" ");
+            for(int j =0;j<pecas.length;j++){
+                printPeca(pecas[i][j],possiveis[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("  a b c d e f g h");
+    }
+    private static void printPeca(PecaDeXadrez peca, boolean back){
+        if(back){
+            System.out.print(ANSI_BLUE_BACKGROUND);
+        }
         if(peca == null){
-            System.out.print("-");
+            System.out.print("-"+ ANSI_RESET);
         }else{
             if (peca.getCor() == Cor.BRANCO) {
                 System.out.print(ANSI_WHITE + peca + ANSI_RESET);

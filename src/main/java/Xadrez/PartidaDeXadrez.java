@@ -5,10 +5,14 @@ import BoardGame.Peca;
 import BoardGame.Posicao;
 
 public class PartidaDeXadrez {
+    private int turno;
+    private Cor jogadorDaVez;
     private Board taboleiro;
     
     public PartidaDeXadrez(){
         this.taboleiro=new Board(8,8);
+        this.turno=1;
+        this.jogadorDaVez=Cor.BRANCO;
         initialSetup();
     }
     public PecaDeXadrez[][] getPecas(){
@@ -19,6 +23,13 @@ public class PartidaDeXadrez {
             }
         }
         return matriz;
+    }
+    
+    public int getTurno(){
+        return this.turno;
+    }
+    public Cor getJogadorDaVez(){
+        return this.jogadorDaVez;
     }
     public boolean[][] movimentoPossiveis(XadrezPosicao source){
         Posicao posicao = source.toPosicao();
@@ -32,11 +43,15 @@ public class PartidaDeXadrez {
         ValidateSourcePosition(source);
         validateTargetPosition(source, target);
         Peca capturaPeca = fazerMovimento(source,target);
+        proximoTurno();
         return (PecaDeXadrez) capturaPeca;
     }
     private void  ValidateSourcePosition(Posicao posicao){
         if(!taboleiro.temUmaPeca(posicao)){
             throw new XadrezException("Tem um peca ne posicao validate");
+        }
+        if(jogadorDaVez != ((PecaDeXadrez)taboleiro.pecas(posicao)).getCor()){
+            throw new XadrezException("Essa peca nao e sua");
         }
         if(!taboleiro.pecas(posicao).temAlgumMovimento()){
             throw new XadrezException("Nao foi possivel mover e");
@@ -52,6 +67,10 @@ public class PartidaDeXadrez {
         Peca capturada = taboleiro.removePeca(target);
         taboleiro.colocarPeca(p,target);
         return capturada;
+    }
+    private void proximoTurno(){
+        turno++;
+        jogadorDaVez = (jogadorDaVez == Cor.BRANCO ) ? Cor.PRETO:Cor.BRANCO;
     }
     private void colocarNovaPeca(char coluna, int linha, PecaDeXadrez peca){
         taboleiro.colocarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao());

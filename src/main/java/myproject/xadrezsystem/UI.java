@@ -1,6 +1,7 @@
 package myproject.xadrezsystem;
 
 import Xadrez.Cor;
+import Xadrez.PartidaDeXadrez;
 import Xadrez.PecaDeXadrez;
 import Xadrez.XadrezPosicao;
 import java.util.InputMismatchException;
@@ -41,6 +42,13 @@ public class UI {
             throw new InputMismatchException("Erro de input");
         }
     }
+    public static void printPartida(PartidaDeXadrez partida){
+        printBoard(partida.getPecas());
+        System.out.println();
+        System.out.println("Turno: "+partida.getTurno());
+        System.out.println("Esperando o jogador: "+partida.getJogadorDaVez());
+        
+    }
     public static void printBoard(PecaDeXadrez[][] pecas){
         for(int i =0;i<pecas.length;i++){
             System.out.print((8 - i)+" ");
@@ -51,7 +59,7 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
     }
-public static void printBoard(PecaDeXadrez[][] pecas, boolean[][] possiveis){
+    public static void printBoard(PecaDeXadrez[][] pecas, boolean[][] possiveis){
         for(int i =0;i<pecas.length;i++){
             System.out.print((8 - i)+" ");
             for(int j =0;j<pecas.length;j++){

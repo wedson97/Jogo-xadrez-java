@@ -17,7 +17,7 @@ public class XadrezSystem {
 		while (true) {
                     try{
                         UI.LimparTela();
-                        UI.printBoard(partida.getPecas());
+                        UI.printPartida(partida);
                         System.out.println();
                         System.out.print("Source: ");
                         XadrezPosicao source = UI.lerPosicao(sc);

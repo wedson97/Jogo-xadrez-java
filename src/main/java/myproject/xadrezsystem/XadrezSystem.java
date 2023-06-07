@@ -16,7 +16,7 @@ public class XadrezSystem {
         Scanner sc = new Scanner(System.in);
 		PartidaDeXadrez partida = new PartidaDeXadrez();
 		List<PecaDeXadrez> capturada = new ArrayList<>();
-		while (true) {
+		while (!partida.getChekMate()) {
                     try{
                         UI.LimparTela();
                         UI.printPartida(partida,capturada);
@@ -45,6 +45,7 @@ public class XadrezSystem {
                     }
                     
 		}
-        
+        UI.LimparTela();
+        UI.printPartida(partida, capturada);
     }
 }

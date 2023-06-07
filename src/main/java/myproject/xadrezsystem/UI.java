@@ -50,10 +50,16 @@ public class UI {
         System.out.println();
         mostrarPecaCapturada(capturada);
         System.out.println("Turno: "+partida.getTurno());
-        System.out.println("Esperando o jogador: "+partida.getJogadorDaVez());
-        if(partida.getCheck()){
-            System.out.println("Check!");
+        if(!partida.getChekMate()){
+            System.out.println("Esperando o jogador: "+partida.getJogadorDaVez());
+            if(partida.getCheck()){
+                System.out.println("Check!");
+            }
+        }else{
+            System.out.println("CHECKMATE");
+            System.out.println("Vencedor: "+partida.getJogadorDaVez());
         }
+        
     }
     public static void printBoard(PecaDeXadrez[][] pecas){
         for(int i =0;i<pecas.length;i++){

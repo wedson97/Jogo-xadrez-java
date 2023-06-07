@@ -62,7 +62,7 @@ public class PartidaDeXadrez {
             throw new XadrezException("Se colocando em check");
         }
         check = (testeCheck(oponente(jogadorDaVez)))? true:false;
-        if(testeCheck(oponente(jogadorDaVez))){
+        if(testeCheckMate(oponente(jogadorDaVez))){
             checkMate = true;
         }else{
            proximoTurno(); 
@@ -167,7 +167,7 @@ public class PartidaDeXadrez {
         colocarNovaPeca('a', 1, new Torre(Cor.BRANCO,taboleiro));
         colocarNovaPeca('b', 1, new Cavalo(Cor.BRANCO,taboleiro));
         colocarNovaPeca('c', 1, new Bispo(Cor.BRANCO,taboleiro));
-        //colocarNovaPeca('d', 1, new Queen(Cor.BRANCO,taboleiro));
+        colocarNovaPeca('d', 1, new Rainha(Cor.BRANCO,taboleiro));
         colocarNovaPeca('e', 1, new Rei(Cor.BRANCO,taboleiro));
         colocarNovaPeca('f', 1, new Bispo(Cor.BRANCO,taboleiro));
         colocarNovaPeca('g', 1, new Cavalo(Cor.BRANCO,taboleiro));
@@ -184,7 +184,7 @@ public class PartidaDeXadrez {
         colocarNovaPeca('a', 8, new Torre(Cor.PRETO,taboleiro));
         colocarNovaPeca('b', 8, new Cavalo(Cor.PRETO,taboleiro));
         colocarNovaPeca('c', 8, new Bispo(Cor.PRETO,taboleiro));
-       // colocarNovaPeca('d', 8, new Queen(Cor.PRETO,taboleiro));
+        colocarNovaPeca('d', 8, new Rainha(Cor.PRETO,taboleiro));
         colocarNovaPeca('e', 8, new Rei(Cor.PRETO,taboleiro));
         colocarNovaPeca('f', 8, new Bispo(Cor.PRETO,taboleiro));
         colocarNovaPeca('g', 8, new Cavalo(Cor.PRETO,taboleiro));

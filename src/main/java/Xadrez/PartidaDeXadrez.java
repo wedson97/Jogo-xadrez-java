@@ -166,10 +166,10 @@ public class PartidaDeXadrez {
     private void initialSetup(){
         colocarNovaPeca('a', 1, new Torre(Cor.BRANCO,taboleiro));
         //colocarNovaPeca('b', 1, new Knight(Cor.BRANCO,taboleiro));
-        //colocarNovaPeca('c', 1, new Bishop(Cor.BRANCO,taboleiro));
+        colocarNovaPeca('c', 1, new Bispo(Cor.BRANCO,taboleiro));
         //colocarNovaPeca('d', 1, new Queen(Cor.BRANCO,taboleiro));
         colocarNovaPeca('e', 1, new Rei(Cor.BRANCO,taboleiro));
-        //colocarNovaPeca('f', 1, new Bishop(Cor.BRANCO,taboleiro));
+        colocarNovaPeca('f', 1, new Bispo(Cor.BRANCO,taboleiro));
         //colocarNovaPeca('g', 1, new Knight(Cor.BRANCO,taboleiro));
         colocarNovaPeca('h', 1, new Torre(Cor.BRANCO,taboleiro));
         colocarNovaPeca('a', 2, new Peao(Cor.BRANCO,taboleiro));
@@ -183,10 +183,10 @@ public class PartidaDeXadrez {
 
         colocarNovaPeca('a', 8, new Torre(Cor.PRETO,taboleiro));
        //colocarNovaPeca('b', 8, new Knight(Cor.PRETO,taboleiro));
-       // colocarNovaPeca('c', 8, new Bishop(Cor.PRETO,taboleiro));
+        colocarNovaPeca('c', 8, new Bispo(Cor.PRETO,taboleiro));
        // colocarNovaPeca('d', 8, new Queen(Cor.PRETO,taboleiro));
         colocarNovaPeca('e', 8, new Rei(Cor.PRETO,taboleiro));
-        //colocarNovaPeca('f', 8, new Bishop(Cor.PRETO,taboleiro));
+        colocarNovaPeca('f', 8, new Bispo(Cor.PRETO,taboleiro));
        // colocarNovaPeca('g', 8, new Knight(Cor.PRETO,taboleiro));
         colocarNovaPeca('h', 8, new Torre(Cor.PRETO,taboleiro));
         colocarNovaPeca('a', 7, new Peao(Cor.PRETO,taboleiro));

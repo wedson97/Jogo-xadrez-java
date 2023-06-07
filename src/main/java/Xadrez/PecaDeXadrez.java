@@ -15,6 +15,9 @@ public abstract class PecaDeXadrez extends Peca{
     public Cor getCor() {
         return cor;
     }
+    public XadrezPosicao getXadrezPosicao(){
+        return XadrezPosicao.ParaPosicao(position);
+    }
     protected boolean eUmaPecaOponente(Posicao posicao){
         PecaDeXadrez p = (PecaDeXadrez)getBoard().pecas(posicao);
         return p!=null && p.getCor()!=cor;

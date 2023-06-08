@@ -4,9 +4,11 @@ import BoardGame.Board;
 import BoardGame.Posicao;
 
 public class Peao extends PecaDeXadrez{
+    private PartidaDeXadrez partida;
 
-    public Peao(Cor cor, Board board) {
+    public Peao(Cor cor, Board board,PartidaDeXadrez partida) {
         super(cor, board);
+        this.partida=partida;
     }
 
     @Override
@@ -31,6 +33,17 @@ public class Peao extends PecaDeXadrez{
            if(getBoard().posicaoExistente(p) && eUmaPecaOponente(p)){
                matriz[p.getLinha()][p.getColuna()]=true;
            }
+           //enpassant
+           if(position.getLinha()==3){
+               Posicao left = new Posicao(position.getLinha(),position.getColuna()-1);
+               if(getBoard().posicaoExistente(left) && eUmaPecaOponente(left) && getBoard().pecas(left)==partida.getEnPassant()){
+                   matriz[left.getLinha()-1][left.getColuna()]=true;
+               }
+               Posicao right = new Posicao(position.getLinha(),position.getColuna()+1);
+               if(getBoard().posicaoExistente(right) && eUmaPecaOponente(right) && getBoard().pecas(right)==partida.getEnPassant()){
+                   matriz[right.getLinha()-1][right.getColuna()]=true;
+               }
+           }
        }else{
           p.setValor(position.getLinha()+1, position.getColuna());
            if(getBoard().posicaoExistente(p) && !getBoard().temUmaPeca(p)){
@@ -49,6 +62,17 @@ public class Peao extends PecaDeXadrez{
            if(getBoard().posicaoExistente(p) && eUmaPecaOponente(p)){
                matriz[p.getLinha()][p.getColuna()]=true;
            } 
+           //enpassant
+           if(position.getLinha()==4){
+               Posicao left = new Posicao(position.getLinha(),position.getColuna()-1);
+               if(getBoard().posicaoExistente(left) && eUmaPecaOponente(left) && getBoard().pecas(left)==partida.getEnPassant()){
+                   matriz[left.getLinha()+1][left.getColuna()]=true;
+               }
+               Posicao right = new Posicao(position.getLinha(),position.getColuna()+1);
+               if(getBoard().posicaoExistente(right) && eUmaPecaOponente(right) && getBoard().pecas(left)==partida.getEnPassant()){
+                   matriz[right.getLinha()+1][right.getColuna()]=true;
+               }
+           }
        }       
        return matriz;
     }

@@ -36,6 +36,11 @@ public class XadrezSystem {
                         if(capturedPiece!=null){
                             capturada.add(capturedPiece);
                         }
+                        if(partida.getPromoted()!=null){
+                            System.out.println("Escolha uma peca (R/B/C/Q)");
+                            String tipo = sc.nextLine();
+                            partida.replacePromoted(tipo);
+                        }
                     }catch(XadrezException e){
                         System.out.println(e.getMessage());
                         sc.nextLine();

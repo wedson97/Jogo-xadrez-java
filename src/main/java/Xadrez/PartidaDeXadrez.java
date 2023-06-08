@@ -3,6 +3,7 @@ package Xadrez;
 import BoardGame.Board;
 import BoardGame.Peca;
 import BoardGame.Posicao;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ public class PartidaDeXadrez {
     private boolean check;
     private boolean checkMate;
     private PecaDeXadrez enpassant;
+    private PecaDeXadrez promoted;
     
     private List<Peca> pecaNoTaboleiro = new ArrayList<>();
     private List<Peca> pecaCapturada = new ArrayList<>();
@@ -43,6 +45,9 @@ public class PartidaDeXadrez {
     public boolean getCheck(){
         return this.check;
     }
+    public PecaDeXadrez getPromoted(){
+        return this.promoted;
+    }
     public PecaDeXadrez getEnPassant(){
         return this.enpassant;
     }
@@ -66,7 +71,14 @@ public class PartidaDeXadrez {
             throw new XadrezException("Se colocando em check");
         }
         PecaDeXadrez movimentoPeca = (PecaDeXadrez)taboleiro.pecas(target);
-        
+        //promotion
+        this.promoted=null;
+        if(movimentoPeca instanceof Peao){
+            if((movimentoPeca.getCor()==Cor.BRANCO && target.getLinha()==0)||(movimentoPeca.getCor()==Cor.PRETO && target.getLinha()==7)){
+                this.promoted = (PecaDeXadrez)taboleiro.pecas(target);
+                this.promoted = replacePromoted("Q");
+            }
+        }
         check = (testeCheck(oponente(jogadorDaVez)))? true:false;
         if(testeCheckMate(oponente(jogadorDaVez))){
             checkMate = true;
@@ -80,6 +92,28 @@ public class PartidaDeXadrez {
             this.enpassant = null;
         }
         return (PecaDeXadrez) capturaPeca;
+    }
+    public PecaDeXadrez replacePromoted(String tipo){
+        if(promoted == null){
+            throw new IllegalStateException("Nao a peca para promover");
+        }
+        if(!tipo.equals("B") && !tipo.equals("R")&& !tipo.equals("Q") && !tipo.equals("C")){
+            throw new InvalidParameterException("Parametro invalido");
+        }
+        Posicao pos = promoted.getXadrezPosicao().toPosicao();
+        Peca p = taboleiro.removePeca(pos);
+        pecaNoTaboleiro.remove(p);
+        PecaDeXadrez newPeca = novaPeca(tipo, promoted.getCor());
+        taboleiro.colocarPeca(newPeca, pos);
+        pecaNoTaboleiro.add(newPeca);
+        return newPeca;
+        
+    }
+    private PecaDeXadrez novaPeca(String tipo, Cor cor){
+        if(tipo.equals("B")) return new Bispo(cor, taboleiro);
+        if(tipo.equals("C")) return new Cavalo(cor, taboleiro);
+        if(tipo.equals("Q")) return new Rainha(cor, taboleiro);
+        return new Torre(cor, taboleiro);
     }
     private void  ValidateSourcePosition(Posicao posicao){
         if(!taboleiro.temUmaPeca(posicao)){

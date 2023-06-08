@@ -38,7 +38,11 @@ public class XadrezSystem {
                         }
                         if(partida.getPromoted()!=null){
                             System.out.println("Escolha uma peca (R/B/C/Q)");
-                            String tipo = sc.nextLine();
+                            String tipo = sc.nextLine().toUpperCase();
+                            while(!tipo.equals("B") && !tipo.equals("R")&& !tipo.equals("Q") && !tipo.equals("C")){
+                               System.out.println("Escolha uma peca (R/B/C/Q)");
+                                tipo = sc.nextLine().toUpperCase(); 
+                            }
                             partida.replacePromoted(tipo);
                         }
                     }catch(XadrezException e){

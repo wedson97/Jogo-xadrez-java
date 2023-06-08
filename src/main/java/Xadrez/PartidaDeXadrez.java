@@ -3,7 +3,6 @@ package Xadrez;
 import BoardGame.Board;
 import BoardGame.Peca;
 import BoardGame.Posicao;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,7 +97,7 @@ public class PartidaDeXadrez {
             throw new IllegalStateException("Nao a peca para promover");
         }
         if(!tipo.equals("B") && !tipo.equals("R")&& !tipo.equals("Q") && !tipo.equals("C")){
-            throw new InvalidParameterException("Parametro invalido");
+            return this.promoted;
         }
         Posicao pos = promoted.getXadrezPosicao().toPosicao();
         Peca p = taboleiro.removePeca(pos);
